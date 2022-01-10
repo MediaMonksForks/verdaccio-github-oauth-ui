@@ -23,10 +23,14 @@ export type VerdaccioConfig = Omit<IncorrectVerdaccioConfig, "packages"> & {
 }
 
 export interface PluginConfig {
-  "client-id": string
-  "client-secret": string
-  org: string | false
-  "enterprise-origin"?: string | false
+  "org": string | false,
+  "client-id": string,
+  "client-secret": string,
+  "enterprise-origin"?: string | false,
+
+  "oidc-issuer-url"?: string,
+  "oidc-username-property"?: string,
+  "oidc-groups-property"?: string,
 }
 
 export type PluginConfigKey = keyof PluginConfig

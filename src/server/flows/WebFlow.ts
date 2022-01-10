@@ -57,7 +57,7 @@ export class WebFlow implements IPluginMiddleware<any> {
 
     try {
       const code = this.provider.getCode(req)
-      const token = await this.provider.getToken(code)
+      const token = await this.provider.getToken(code, this.getRedirectUrl(req))
       const [username, groups] = await Promise.all([
         this.provider.getUsername(token),
         this.provider.getGroups(token),

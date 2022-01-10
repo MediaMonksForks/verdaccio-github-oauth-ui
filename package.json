@@ -1,7 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/package",
-  "name": "verdaccio-github-oauth-ui",
-  "version": "3.2.0",
+  "name": "verdaccio-oidc-ui",
+  "version": "3.2.1",
   "keywords": [
     "github",
     "login",
@@ -12,14 +12,14 @@
     "registry",
     "verdaccio"
   ],
-  "homepage": "https://github.com/n4bb12/verdaccio-github-oauth-ui/blob/master/README.md",
-  "bugs": "https://github.com/n4bb12/verdaccio-github-oauth-ui/issues",
-  "repository": "github:n4bb12/verdaccio-github-oauth-ui",
+  "homepage": "https://github.com/TuneZilla-Development/verdaccio-oidc-ui/blob/master/README.md",
+  "bugs": "https://github.com/TuneZilla-Development/verdaccio-oidc-ui/issues",
+  "repository": "github:TuneZilla-Development/verdaccio-oidc-ui",
   "license": "MIT",
   "author": "Abraham Schilling",
   "main": "dist/server.js",
   "bin": {
-    "verdaccio-github-oauth-ui": "dist/cli.js"
+    "verdaccio-oidc-ui": "dist/cli.js"
   },
   "files": [
     "dist"
@@ -55,7 +55,8 @@
     "octokit": "^1.7.0",
     "open": "^8.0.7",
     "ow": "^0.28.1",
-    "query-string": "^7.0.0"
+    "query-string": "^7.0.0",
+    "openid-client": "^3.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",

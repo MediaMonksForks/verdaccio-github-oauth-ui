@@ -1,20 +1,36 @@
 <h1 align="center">
-  📦🔐 Verdaccio GitHub OAuth - With UI Support
+  📦🔐 Verdaccio OpenID Connect - With UI Support
 </h1>
 
+<h2 align="center">
+  Fork of <a href="https://github.com/n4bb12/verdaccio-oidc-ui">n4bb12/verdaccio-oidc-ui</a>
+</h2>
+
 <p align="center">
-  A GitHub OAuth Plugin for Verdaccio – <a href="https://www.verdaccio.org">https://www.verdaccio.org</a>
+  An OpenID Connect Plugin for Verdaccio – <a href="https://www.verdaccio.org">https://www.verdaccio.org</a>
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/verdaccio-github-oauth-ui">
-    <img alt="Version" src="https://flat.badgen.net/npm/v/verdaccio-github-oauth-ui?icon=npm">
+  <a href="https://www.npmjs.com/package/verdaccio-oidc-ui">
+    <img alt="Version" src="https://flat.badgen.net/npm/v/verdaccio-oidc-ui?icon=npm">
   </a>
-  <a href="https://raw.githubusercontent.com/n4bb12/verdaccio-github-oauth-ui/master/LICENSE">
-    <img alt="License" src="https://flat.badgen.net/github/license/n4bb12/verdaccio-github-oauth-ui?icon=github">
+  <a href="https://raw.githubusercontent.com/TuneZilla-Development/verdaccio-oidc-ui/master/LICENSE">
+    <img alt="License" src="https://flat.badgen.net/github/license/TuneZilla-Development/verdaccio-oidc-ui?icon=github">
   </a>
-  <a href="https://github.com/n4bb12/verdaccio-github-oauth-ui/issues/new/choose">
-    <img alt="Issues" src="https://flat.badgen.net/badge/github/Create Issue/blue?icon=github">
+  <a href="https://github.com/TuneZilla-Development/verdaccio-oidc-ui/issues/new/choose">
+    <img alt="Issues" src="https://flat.badgen.net/badge/github/create issue/pink?icon=github">
+  </a>
+  <a href="https://circleci.com/gh/n4bb12/workflows/verdaccio-oidc-ui">
+    <img alt="CircleCI" src="https://flat.badgen.net/circleci/github/TuneZilla-Development/verdaccio-oidc-ui/master?icon=circleci">
+  </a>
+  <a href="https://codecov.io/github/TuneZilla-Development/verdaccio-oidc-ui">
+    <img alt="Coverage" src="https://flat.badgen.net/codecov/c/github/TuneZilla-Development/verdaccio-oidc-ui?icon=codecov">
+  </a>
+  <a href="https://lgtm.com/projects/g/TuneZilla-Development/verdaccio-oidc-ui/alerts">
+    <img alt="LGTM" src="https://flat.badgen.net/lgtm/alerts/g/TuneZilla-Development/verdaccio-oidc-ui?icon=lgtm">
+  </a>
+  <a href="https://david-dm.org/TuneZilla-Development/verdaccio-oidc-ui">
+    <img alt="Dependencies" src="https://flat.badgen.net/david/dep/TuneZilla-Development/verdaccio-oidc-ui?icon=npm">
   </a>
 </p>
 
@@ -22,15 +38,13 @@
 
 <img src="screenshots/authorize.png" align="right" width="270"/>
 
-This is a Verdaccio plugin that offers GitHub OAuth integration for both the browser and the command line.
+This is a Verdaccio plugin that offers OpenID Connect integration for both the browser and the command line.
 
 ### Features
 
-- The Verdaccio login button redirects you to GitHub instead of showing a login form. Logout works, too.
-- Login can be limited to members of a certain GitHub org.
-- Package access/publish/unpublish can be limited to GitHub orgs, teams, repos, and users.
-- The usage info is updated for use with GitHub OAuth.
-- A built-in command-line tool helps you configure npm.
+- UI integration with fully functional login and logout. When clicking the login button the user is redirected to identity provider and returns with a working session.
+- Updated usage info and working copy-to-clipboard for setup commands.
+- A small CLI for quick-and-easy configuration.
 
 ### Compatibility
 
@@ -45,12 +59,12 @@ If you would like to use this with Verdaccio 3-4, Node.js 10-13, or IE you can u
 ### Install
 
 ```
-$ npm install verdaccio-github-oauth-ui
+$ npm install verdaccio-oidc-ui
 ```
 
 ### GitHub Config
 
-- Create an OAuth app at https://github.com/settings/developers
+- Create an OpenID Connect app at your provider of choice, like https://docs.gitlab.com/ee/integration/openid_connect_provider.html
 - The callback URL should be `YOUR_REGISTRY_URL/-/oauth/callback`
 
 Example:
@@ -63,28 +77,17 @@ Merge the below options with your existing Verdaccio config:
 
 ```yml
 middlewares:
-  github-oauth-ui:
+  oidc-ui:
     enabled: true
 
 auth:
-  github-oauth-ui:
-    client-id: GITHUB_CLIENT_ID
-    client-secret: GITHUB_CLIENT_SECRET
-    org: GITHUB_ORG
-    enterprise-origin: GITHUB_ENTERPRISE_ORIGIN # (if you are using an enterprise instance)
-```
-
-#### Using environment variables
-
-The plugin options can be actual values or the names of environment variables containing the values.
-
-For example, either of the below will work:
-- `client-id: abc`
-- `client-id: GITHUB_CLIENT_ID` and set an environment variable `GITHUB_CLIENT_ID=abc`.
-
-The environment variable names can be freely chosen. The above is just an example.
-
-#### `client-id` and `client-secret` (required, string)
+  oidc-ui:
+    org: REQUIRED_GROUP
+    client-id: OIDC_CLIENT_ID
+    client-secret: OIDC_CLIENT_SECRET
+    oidc-issuer-url: https://gitlab.com
+    oidc-username-property: nickname
+    oidc-groups-property: groups
 
 These values can be obtained from the GitHub OAuth app page at https://github.com/settings/developers.
 
@@ -128,19 +131,33 @@ The following groups are added during login and can be used to configure package
 
 Note that visibility to orgs, org teams, and org repositories requires 
 
-Additionally, the following deprecated groups are added:
+Users within this group will be able to authenticate.
 
 - `github/GITHUB_ORG` — for every GitHub org the user is a member of
 - `github/GITHUB_ORG/GITHUB_TEAM` — for every GitHub team the user is a member of
 
 You can use these groups as shown below:
 
+### `oidc-issuer-url`
+
+The URL of your identity provider. If using gitlab.com, it would be https://gitlab.com
+
+### `oidc-username-property` (optional)
+
+The userinfo key that represents a username with your identity provider. Defaults to `nickname`
+
+See https://docs.gitlab.com/ee/integration/openid_connect_provider.html#shared-information
 ```yml
 packages:
   foo:
     # limit actions to logged-in users (works in combination with other plugins such as htpasswd)
     access: $authenticated
 
+### `oidc-groups-property` (optional)
+
+The userinfo key that represents groups with your identity provider. Defaults to `groups`
+
+See https://docs.gitlab.com/ee/integration/openid_connect_provider.html#shared-information
     # limit actions to org members
     publish: github/owner/GITHUB_ORG
 
@@ -152,6 +169,7 @@ packages:
 ```
 
 See [Package Access](https://verdaccio.org/docs/en/packages) for more examples.
+
 
 ### Proxy Config
 
@@ -184,7 +202,7 @@ prompted to authorize Verdaccio.
 The easiest way to configure npm is to use this short command:
 
 ```
-$ npx verdaccio-github-oauth-ui --registry http://localhost:4873
+$ npx verdaccio-oidc-ui --registry http://localhost:4873
 ```
 
 #### Option B) Copy commands from the UI
