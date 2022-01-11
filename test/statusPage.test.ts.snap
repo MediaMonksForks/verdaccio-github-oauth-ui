@@ -4,7 +4,7 @@ exports[`Shared buildStatusPage access denied page matches the snapshot 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
   <head>
-    <title>github-oauth-ui</title>
+    <title>oidc-ui</title>
     <style>
       html,
       body {
@@ -47,7 +47,7 @@ exports[`Shared buildStatusPage error page matches the snapshot 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
   <head>
-    <title>github-oauth-ui</title>
+    <title>oidc-ui</title>
     <style>
       html,
       body {
@@ -90,7 +90,7 @@ exports[`Shared buildStatusPage generic page matches the snapshot 1`] = `
 "<!DOCTYPE html>
 <html lang=\\"en\\">
   <head>
-    <title>github-oauth-ui</title>
+    <title>oidc-ui</title>
     <style>
       html,
       body {
