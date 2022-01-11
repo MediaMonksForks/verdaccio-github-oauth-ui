@@ -44,7 +44,7 @@ export class OpenIDConnectAuthProvider implements AuthProvider {
 
   getLoginUrl(callbackUrl: string): string {
     return this.discoveredClient.authorizationUrl({
-      scope: "openid",
+      scope: "openid groups",
       redirect_uri: callbackUrl,
     });
   }

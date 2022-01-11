@@ -1807,7 +1807,7 @@ function () {
 
   OpenIDConnectAuthProvider.prototype.getLoginUrl = function (callbackUrl) {
     return this.discoveredClient.authorizationUrl({
-      scope: "openid",
+      scope: "openid groups",
       redirect_uri: callbackUrl
     });
   };
