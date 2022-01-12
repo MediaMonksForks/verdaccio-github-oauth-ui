@@ -3,15 +3,16 @@ import {
   AuthAccessCallback,
   AuthCallback,
   IPluginAuth,
-  IPluginMiddleware,
   RemoteUser,
 } from "@verdaccio/types"
+import { IPluginMiddleware } from "@verdaccio/server/build/server";
 import { Application } from "express"
 
 import { CliFlow, WebFlow } from "../flows"
 import { GitHubAuthProvider } from "../github"
 import { OpenIDConnectAuthProvider } from "../oidc"
-import { Auth, Verdaccio } from "../verdaccio"
+import { Verdaccio } from "../verdaccio"
+import { Auth } from "@verdaccio/auth"
 import { AuthCore } from "./AuthCore"
 import { Cache } from "./Cache"
 import { Config, PackageAccess, validateConfig } from "./Config"

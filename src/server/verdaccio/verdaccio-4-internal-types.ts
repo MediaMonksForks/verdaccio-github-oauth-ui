@@ -3,8 +3,8 @@
 
 import {
   IBasicAuth,
-  IBasicStorage,
-  IStorageManager,
+  // IBasicStorage,
+  // IStorageManager,
   UpLinkConf,
   Callback,
   Versions,
@@ -105,7 +105,7 @@ export type $SidebarPackage = Package & { latest: any }
 
 export interface IAuthWebUI {
   jwtEncrypt(user: RemoteUser, signOptions: JWTSignOptions): Promise<string>
-  aesEncrypt(buf: Buffer): Buffer
+  // aesEncrypt(buf: Buffer): Buffer
 }
 
 interface IAuthMiddleware {
@@ -123,16 +123,6 @@ export interface IAuth extends IBasicAuth<Config>, IAuthMiddleware, IAuthWebUI {
     user: RemoteUser,
     callback: Callback,
   ): void
-}
-
-export interface IWebSearch {
-  index: any
-  storage: IStorageHandler
-  query(query: string): any
-  add(pkg: Version): void
-  remove(name: string): void
-  reindex(): void
-  configureStorage(storage: IStorageHandler): void
 }
 
 // FIXME: This prop should be on @verdaccio/types
@@ -158,54 +148,3 @@ export interface IProxy {
   search(options: any): any
   getRemoteMetadata(name: string, options: any, callback: Callback): void
 }
-
-export interface IStorage extends IBasicStorage<Config>, ITokenActions {
-  config: Config
-  storagePlugin: IPluginStorage<Config>
-  logger: Logger
-}
-
-export interface IGetPackageOptions {
-  callback: Callback
-  name: string
-  keepUpLinkData: boolean
-  uplinksLook: boolean
-  req: any
-}
-
-export interface ISyncUplinks {
-  uplinksLook?: boolean
-  etag?: string
-  req?: Request
-}
-
-export type IPluginFilters = IPluginStorageFilter<Config>[]
-
-export interface IStorageHandler
-  extends IStorageManager<Config>,
-    ITokenActions {
-  config: Config
-  localStorage: IStorage | null
-  filters: IPluginFilters
-  uplinks: ProxyList
-  init(config: Config, filters: IPluginFilters): Promise<string>
-  saveToken(token: Token): Promise<any>
-  deleteToken(user: string, tokenKey: string): Promise<any>
-  readTokens(filter: TokenFilter): Promise<Token[]>
-  _syncUplinksMetadata(
-    name: string,
-    packageInfo: Package,
-    options: any,
-    callback: Callback,
-  ): void
-  _updateVersionsHiddenUpLink(versions: Versions, upLink: IProxy): void
-}
-
-/**
- * @property { string | number | Styles }  [ruleOrSelector]
- */
-export interface Styles {
-  [ruleOrSelector: string]: string | number | Styles
-}
-
-export type AuthorAvatar = Author & { avatar?: string }

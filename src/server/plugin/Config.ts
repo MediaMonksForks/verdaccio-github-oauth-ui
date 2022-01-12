@@ -15,7 +15,7 @@ import { logger } from "../../logger"
 // Verdaccio incorrectly types some of these as string arrays
 // although they are all strings.
 export interface PackageAccess extends IncorrectVerdaccioPackageAccess {
-  unpublish?: string[]
+  unpublish: string[]
 }
 
 export type VerdaccioConfig = Omit<IncorrectVerdaccioConfig, "packages"> & {

@@ -2168,7 +2168,7 @@ function () {
   };
 
   Verdaccio.prototype.encrypt = function (text) {
-    return this.auth.aesEncrypt(Buffer.from(text)).toString("base64");
+    return this.auth.aesEncrypt(text);
   };
 
   return Verdaccio;
@@ -2424,29 +2424,31 @@ function () {
   };
 
   AuthCore.prototype.createUiCallbackUrl = function (username, token, groups) {
+    var _a;
+
     return __awaiter(this, void 0, Promise, function () {
       var user, uiToken, npmToken, query, url;
-      return __generator(this, function (_a) {
-        switch (_a.label) {
+      return __generator(this, function (_b) {
+        switch (_b.label) {
           case 0:
             return [4
             /*yield*/
             , this.createAuthenticatedUser(username, groups)];
 
           case 1:
-            user = _a.sent();
+            user = _b.sent();
             return [4
             /*yield*/
             , this.verdaccio.issueUiToken(user)];
 
           case 2:
-            uiToken = _a.sent();
+            uiToken = _b.sent();
             return [4
             /*yield*/
             , this.verdaccio.issueNpmToken(token, user)];
 
           case 3:
-            npmToken = _a.sent();
+            npmToken = (_a = _b.sent()) !== null && _a !== void 0 ? _a : '';
             query = {
               username: username,
               uiToken: uiToken,

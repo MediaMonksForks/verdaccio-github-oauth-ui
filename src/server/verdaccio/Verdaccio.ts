@@ -1,7 +1,8 @@
 import { JWTSignOptions } from "@verdaccio/types"
 import merge from "lodash/merge"
 import { getMajorVersion, VerdaccioConfig } from "../plugin/Config"
-import { Auth, User } from "../verdaccio"
+import { User } from "../verdaccio"
+import { Auth } from '@verdaccio/auth';
 
 // Most of this is duplicated Verdaccio code because it is unfortunately not availabel via API.
 // https://github.com/verdaccio/verdaccio/blob/master/src/lib/auth-utils.ts#L129
@@ -65,6 +66,6 @@ export class Verdaccio {
   }
 
   private encrypt(text: string) {
-    return this.auth.aesEncrypt(Buffer.from(text)).toString("base64")
+    return this.auth.aesEncrypt(text)
   }
 }

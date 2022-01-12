@@ -28,7 +28,7 @@ describe("Plugin", () => {
 
       it("unprotected packages can be accessed without any permission groups", (done) => {
         user = createTestUser([])
-        pkg = createTestPackage({})
+        pkg = createTestPackage({ unpublish: []})
 
         plugin.allow_access(user, pkg, (err, granted) => {
           expect(err).toBeNull()
@@ -39,7 +39,7 @@ describe("Plugin", () => {
 
       it("protected packages cannot be accessed without the required permission group", (done) => {
         user = createTestUser([])
-        pkg = createTestPackage({ access: ["required-group"] })
+        pkg = createTestPackage({ access: ["required-group"], unpublish: [] })
 
         plugin.allow_access(user, pkg, (err, granted) => {
           expect(err).toBeNull()
@@ -50,7 +50,7 @@ describe("Plugin", () => {
 
       it("protected packages can be accessed with the required permission group", (done) => {
         user = createTestUser(["required-group"])
-        pkg = createTestPackage({ access: ["required-group"] })
+        pkg = createTestPackage({ access: ["required-group"], unpublish: [] })
 
         plugin.allow_access(user, pkg, (err, granted) => {
           expect(err).toBeNull()
@@ -68,7 +68,7 @@ describe("Plugin", () => {
 
       it("unprotected packages can be published without any permission groups", (done) => {
         user = createTestUser([])
-        pkg = createTestPackage({})
+        pkg = createTestPackage({ unpublish: []})
 
         plugin.allow_publish(user, pkg, (err, granted) => {
           expect(err).toBeNull()
@@ -79,7 +79,7 @@ describe("Plugin", () => {
 
       it("protected packages cannot be published without the required permission group", (done) => {
         user = createTestUser([])
-        pkg = createTestPackage({ publish: ["required-group"] })
+        pkg = createTestPackage({ publish: ["required-group"], unpublish: [] })
 
         plugin.allow_publish(user, pkg, (err, granted) => {
           expect(err).toBeNull()
@@ -90,7 +90,7 @@ describe("Plugin", () => {
 
       it("protected packages can be published with the required permission group", (done) => {
         user = createTestUser(["required-group"])
-        pkg = createTestPackage({ publish: ["required-group"] })
+        pkg = createTestPackage({ publish: ["required-group"], unpublish: [] })
 
         plugin.allow_publish(user, pkg, (err, granted) => {
           expect(err).toBeNull()
@@ -101,7 +101,7 @@ describe("Plugin", () => {
 
       it("publish protection falls back to access protection", (done) => {
         user = createTestUser([])
-        pkg = createTestPackage({ access: ["required-group"] })
+        pkg = createTestPackage({ access: ["required-group"], unpublish: [] })
 
         plugin.allow_publish(user, pkg, (err, granted) => {
           expect(err).toBeNull()
@@ -119,7 +119,7 @@ describe("Plugin", () => {
 
       it("unprotected packages can be unpublished without any permission groups", (done) => {
         user = createTestUser([])
-        pkg = createTestPackage({})
+        pkg = createTestPackage({ unpublish: []})
 
         plugin.allow_unpublish(user, pkg, (err, granted) => {
           expect(err).toBeNull()
@@ -152,7 +152,7 @@ describe("Plugin", () => {
 
       it("unpublish protection falls back to publish protection", (done) => {
         user = createTestUser([])
-        pkg = createTestPackage({ publish: ["required-group"] })
+        pkg = createTestPackage({ publish: ["required-group"], unpublish: [] })
 
         plugin.allow_unpublish(user, pkg, (err, granted) => {
           expect(err).toBeNull()
@@ -163,7 +163,7 @@ describe("Plugin", () => {
 
       it("unpublish protection falls back to access protection", (done) => {
         user = createTestUser([])
-        pkg = createTestPackage({ access: ["required-group"] })
+        pkg = createTestPackage({ access: ["required-group"], unpublish: [] })
 
         plugin.allow_unpublish(user, pkg, (err, granted) => {
           expect(err).toBeNull()

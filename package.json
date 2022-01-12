@@ -45,6 +45,8 @@
   "dependencies": {
     "@octokit/oauth-methods": "^1.2.6",
     "@octokit/request": "^5.6.2",
+    "@verdaccio/auth": "^6.0.0-6-next.16",
+    "@verdaccio/server": "^6.0.0-6-next.24",
     "chalk": "^4.1.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.0",
@@ -54,9 +56,9 @@
     "minimist": "^1.2.0",
     "octokit": "^1.7.0",
     "open": "^8.0.7",
+    "openid-client": "^3.14.0",
     "ow": "^0.28.1",
-    "query-string": "^7.0.0",
-    "openid-client": "^3.14.0"
+    "query-string": "^7.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.0",
@@ -73,7 +75,7 @@
     "@types/minimist": "^1.2.1",
     "@types/node": "^16.11.9",
     "@types/query-string": "^6.3.0",
-    "@verdaccio/types": "^10.0.0",
+    "@verdaccio/types": "6-next",
     "babel-jest": "^27.3.1",
     "codecov": "^3.8.1",
     "core-js": "^3.11.1",
