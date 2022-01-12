@@ -47,6 +47,7 @@
     "@octokit/request": "^5.6.2",
     "@verdaccio/auth": "^6.0.0-6-next.16",
     "@verdaccio/server": "^6.0.0-6-next.24",
+    "@verdaccio/url": "^11.0.0-6-next.8",
     "chalk": "^4.1.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.0",
@@ -86,7 +87,7 @@
     "release-it": "^14.6.1",
     "timekeeper": "^2.2.0",
     "typescript": "^4.2.4",
-    "verdaccio": "^5.0.4",
+    "verdaccio": "^6.0.0-6-next.28",
     "verdaccio-htpasswd": "^10.0.0"
   },
   "peerDependencies": {

@@ -630,7 +630,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.WebFlow = void 0;
 
-var utils_1 = require("verdaccio/build/lib/utils");
+var url_1 = require("@verdaccio/url");
 
 var logger_1 = require("../../logger");
 
@@ -763,7 +763,7 @@ function () {
   };
 
   WebFlow.prototype.getRedirectUrl = function (req) {
-    var baseUrl = (0, utils_1.getPublicUrl)(this.config.url_prefix, req).replace(/\/$/, "");
+    var baseUrl = (0, url_1.getPublicUrl)(this.config.url_prefix, req).replace(/\/$/, "");
     var path = (0, redirect_1.getCallbackPath)(req.params.id);
     var redirectUrl = baseUrl + path;
     return redirectUrl;

@@ -7,7 +7,7 @@ import { Config, PackageAccess, PluginConfig } from "src/server/plugin/Config"
 import { Plugin } from "src/server/plugin/Plugin"
 import { Verdaccio } from "src/server/verdaccio/Verdaccio"
 import timekeeper from "timekeeper"
-import Auth from "verdaccio/build/lib/auth"
+import { Auth } from "@verdaccio/auth"
 
 export const testLoginOrgName = "TEST_LOGIN_ORG"
 export const testLoginOrgGroup = `github/owner/${testLoginOrgName}`
@@ -152,9 +152,9 @@ class PatchedAuth extends Auth {
   constructor(config: any) {
     super(config)
   }
-  _loadPlugin() {
-    return []
-  }
+  // _loadPlugin() {
+  //   return []
+  // }
 }
 
 export function createRealVerdaccioAuth(config: Partial<Config> = {}): Auth {

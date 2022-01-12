@@ -1,6 +1,6 @@
 import { IPluginMiddleware } from "@verdaccio/types"
 import { Application, Handler, Request } from "express"
-import { getPublicUrl } from "verdaccio/build/lib/utils"
+import { getPublicUrl, RequestOptions } from "@verdaccio/url"
 
 import { logger } from "../../logger"
 import { getAuthorizePath, getCallbackPath } from "../../redirect"
@@ -78,7 +78,7 @@ export class WebFlow implements IPluginMiddleware<any> {
   }
 
   private getRedirectUrl(req: Request): string {
-    const baseUrl = getPublicUrl(this.config.url_prefix, req).replace(/\/$/, "")
+    const baseUrl = getPublicUrl(this.config.url_prefix, req as RequestOptions).replace(/\/$/, "")
     const path = getCallbackPath(req.params.id)
     const redirectUrl = baseUrl + path
 
