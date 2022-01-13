@@ -7,6 +7,7 @@ import {
 } from "@verdaccio/types"
 import { IPluginMiddleware } from "@verdaccio/server/build/server";
 import { Application } from "express"
+import { logger } from "../../logger"
 
 import { CliFlow, WebFlow } from "../flows"
 import { GitHubAuthProvider } from "../github"
@@ -70,7 +71,7 @@ export class Plugin implements IPluginMiddleware<any>, IPluginAuth<any> {
     token: string,
     callback: AuthCallback,
   ): Promise<void> {
-    console.log('[oidc-ui-plugin authenticate]', username, token);
+    logger.log('[authenticate]', username, token);
     try {
       if (!username || !token) {
         callback(null, false)

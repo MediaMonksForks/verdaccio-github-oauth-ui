@@ -65,6 +65,8 @@ export class AuthCore {
     const uiToken = await this.verdaccio.issueUiToken(user)
     const npmToken = await this.verdaccio.issueNpmToken(token, user) ?? ''
 
+    logger.log('npmToken', npmToken);
+
     const query = { username, uiToken, npmToken }
     const url = "/?" + stringify(query)
 

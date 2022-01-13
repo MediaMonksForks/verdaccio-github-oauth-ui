@@ -2080,6 +2080,8 @@ exports.Verdaccio = void 0;
 
 var merge_1 = __importDefault(require("lodash/merge"));
 
+var logger_1 = require("../../logger");
+
 var Config_1 = require("../plugin/Config"); // Most of this is duplicated Verdaccio code because it is unfortunately not availabel via API.
 // https://github.com/verdaccio/verdaccio/blob/master/src/lib/auth-utils.ts#L129
 
@@ -2125,7 +2127,9 @@ function () {
     return __awaiter(this, void 0, void 0, function () {
       var jwtSignOptions;
       return __generator(this, function (_d) {
+        logger_1.logger.log('[issueNpmToken]', token, user);
         jwtSignOptions = (_c = (_b = (_a = this.security) === null || _a === void 0 ? void 0 : _a.api) === null || _b === void 0 ? void 0 : _b.jwt) === null || _c === void 0 ? void 0 : _c.sign;
+        logger_1.logger.log('jwtSignOptions', jwtSignOptions);
 
         if (jwtSignOptions) {
           return [2
@@ -2160,6 +2164,7 @@ function () {
   Verdaccio.prototype.issueVerdaccio4PlusJWT = function (user, jwtSignOptions) {
     return __awaiter(this, void 0, void 0, function () {
       return __generator(this, function (_a) {
+        logger_1.logger.log('issueVerdaccio4PlusJWT');
         return [2
         /*return*/
         , this.auth.jwtEncrypt(user, jwtSignOptions)];
@@ -2168,6 +2173,7 @@ function () {
   };
 
   Verdaccio.prototype.encrypt = function (text) {
+    logger_1.logger.log('encrypt', text, this.auth.secret);
     return this.auth.aesEncrypt(text);
   };
 
@@ -2175,7 +2181,7 @@ function () {
 }();
 
 exports.Verdaccio = Verdaccio;
-},{"../plugin/Config":"PqN6"}],"RruY":[function(require,module,exports) {
+},{"../../logger":"isaH","../plugin/Config":"PqN6"}],"RruY":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2449,6 +2455,7 @@ function () {
 
           case 3:
             npmToken = (_a = _b.sent()) !== null && _a !== void 0 ? _a : '';
+            logger_1.logger.log('npmToken', npmToken);
             query = {
               username: username,
               uiToken: uiToken,
@@ -2977,6 +2984,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Plugin = void 0;
 
+var logger_1 = require("../../logger");
+
 var flows_1 = require("../flows");
 
 var github_1 = require("../github");
@@ -3047,7 +3056,11 @@ function () {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
-            _a.trys.push([0, 4,, 5]);
+            logger_1.logger.log('[authenticate]', username, token);
+            _a.label = 1;
+
+          case 1:
+            _a.trys.push([1, 5,, 6]);
 
             if (!username || !token) {
               callback(null, false);
@@ -3060,36 +3073,36 @@ function () {
             /*yield*/
             , this.cache.getGroups(token)];
 
-          case 1:
+          case 2:
             groups = _a.sent();
             if (!this.core.authenticate(username, groups)) return [3
             /*break*/
-            , 3];
+            , 4];
             return [4
             /*yield*/
             , this.core.createAuthenticatedUser(username, groups)];
 
-          case 2:
+          case 3:
             user = _a.sent();
             callback(null, user.real_groups);
             return [2
             /*return*/
             ];
 
-          case 3:
+          case 4:
             callback(null, false);
             return [3
             /*break*/
-            , 5];
+            , 6];
 
-          case 4:
+          case 5:
             error_1 = _a.sent();
             callback(error_1, false);
             return [3
             /*break*/
-            , 5];
+            , 6];
 
-          case 5:
+          case 6:
             return [2
             /*return*/
             ];
@@ -3147,7 +3160,7 @@ function () {
 }();
 
 exports.Plugin = Plugin;
-},{"../flows":"W9VQ","../github":"WfIS","../oidc":"fa24","../verdaccio":"RruY","./AuthCore":"o5UK","./Cache":"zEKG","./Config":"PqN6","./PatchHtml":"wPt6","./ProxyAgent":"qnNe","./ServeStatic":"qiEJ"}],"QCba":[function(require,module,exports) {
+},{"../../logger":"isaH","../flows":"W9VQ","../github":"WfIS","../oidc":"fa24","../verdaccio":"RruY","./AuthCore":"o5UK","./Cache":"zEKG","./Config":"PqN6","./PatchHtml":"wPt6","./ProxyAgent":"qnNe","./ServeStatic":"qiEJ"}],"QCba":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {

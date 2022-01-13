@@ -1,5 +1,6 @@
 import { JWTSignOptions } from "@verdaccio/types"
 import merge from "lodash/merge"
+import { logger } from "../../logger"
 import { getMajorVersion, VerdaccioConfig } from "../plugin/Config"
 import { User } from "../verdaccio"
 import { Auth } from '@verdaccio/auth';
@@ -42,7 +43,9 @@ export class Verdaccio {
   }
 
   async issueNpmToken(token: string, user: User) {
+    logger.log('[issueNpmToken]', token, user);
     const jwtSignOptions = this.security?.api?.jwt?.sign
+    logger.log('jwtSignOptions', jwtSignOptions);
 
     if (jwtSignOptions) {
       return this.issueVerdaccio4PlusJWT(user, jwtSignOptions)
@@ -62,10 +65,12 @@ export class Verdaccio {
     user: User,
     jwtSignOptions: JWTSignOptions,
   ) {
+    logger.log('issueVerdaccio4PlusJWT')
     return this.auth.jwtEncrypt(user, jwtSignOptions)
   }
 
   private encrypt(text: string) {
+    logger.log('encrypt', text, this.auth.secret)
     return this.auth.aesEncrypt(text)
   }
 }
