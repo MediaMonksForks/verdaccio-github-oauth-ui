@@ -70,6 +70,7 @@ export class Plugin implements IPluginMiddleware<any>, IPluginAuth<any> {
     token: string,
     callback: AuthCallback,
   ): Promise<void> {
+    console.log('[oidc-ui-plugin authenticate]', username, token);
     try {
       if (!username || !token) {
         callback(null, false)
