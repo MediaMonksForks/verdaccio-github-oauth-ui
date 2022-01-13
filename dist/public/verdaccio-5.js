@@ -1,1 +1,932 @@
-(function () {function N(a){return a&&a.__esModule?{d:a.default}:{d:a}}var g={};function O(e){localStorage.setItem("username",e.username),localStorage.setItem("token",e.uiToken),localStorage.setItem("npm",e.npmToken)}function P(){localStorage.removeItem("username"),localStorage.removeItem("token"),localStorage.removeItem("npm")}function k(){return!!localStorage.getItem("username")&&!!localStorage.getItem("token")&&!!localStorage.getItem("npm")}function Q(e){return e.username&&e.uiToken&&e.npmToken}function R(){history.replaceState(null,"",location.pathname),location.reload()}function S(){if(!k()){var r=W();Q(r)&&(O(r),R())}}function T(r){S();var $=r.loginButton,e=r.logoutButton,t=r.updateUsageInfo;p($,function(){location.href=U}),p(e,function(){P(),location.href=V}),document.addEventListener("click",function(){return m(t)}),m(t)}var U="/-/oauth/authorize";var V="/";function W(){var $P2vx$$interop$default=N(f);return $P2vx$$interop$default.d.parse(window.location.search||"?")}function m(e){for(var r=0;r<10;r++)setTimeout(function(){return e()},100*r)}function X(e,r){var t=r.path||r.composedPath&&r.composedPath(),$=document.querySelector(e);return t.includes($)}function p(e,r){document.addEventListener("click",function(t){X(e,t)&&(t.preventDefault(),t.stopPropagation(),r())},!0)}var Y={};Y=e=>encodeURIComponent(e).replace(/[!'()*]/g,e=>`%${e.charCodeAt(0).toString(16).toUpperCase()}`);var Z={},q="%[a-f0-9]{2}",w=new RegExp(q,"gi"),x=new RegExp("("+q+")+","gi");function h(e,r){try{return decodeURIComponent(e.join(""))}catch(n){}if(1===e.length)return e;r=r||1;var t=e.slice(0,r),o=e.slice(r);return Array.prototype.concat.call([],h(t),h(o))}function _(e){try{return decodeURIComponent(e)}catch(o){for(var r=e.match(w),t=1;t<r.length;t++)r=(e=h(r,t).join("")).match(w);return e}}function aa(e){for(var r={"%FE%FF":"\uFFFD\uFFFD","%FF%FE":"\uFFFD\uFFFD"},t=x.exec(e);t;){try{r[t[0]]=decodeURIComponent(t[0])}catch(a){var o=_(t[0]);o!==t[0]&&(r[t[0]]=o)}t=x.exec(e)}r["%C2"]="\uFFFD";for(var n=Object.keys(r),$=0;$<n.length;$++){var c=n[$];e=e.replace(new RegExp(c,"g"),r[c])}return e}Z=function(e){if("string"!=typeof e)throw new TypeError("Expected `encodedURI` to be of type `string`, got `"+typeof e+"`");try{return e=e.replace(/\+/g," "),decodeURIComponent(e)}catch(r){return aa(e)}};var y={};y=(e,t)=>{if("string"!=typeof e||"string"!=typeof t)throw new TypeError("Expected the arguments to be of type `string`");if(""===t)return[e];const r=e.indexOf(t);return-1===r?[e]:[e.slice(0,r),e.slice(r+t.length)]};var ba={};ba=function(r,e){for(var s={},t=Object.keys(r),a=Array.isArray(e),n=0;n<t.length;n++){var o=t[n],$=r[o];(a?-1!==e.indexOf(o):e(o,$,r))&&(s[o]=$)}return s};var f={};const ca=r=>null==r,j=Symbol("encodeFragmentIdentifier");function da(r){switch(r.arrayFormat){case"index":return e=>(t,a)=>{const $=t.length;return void 0===a||r.skipNull&&null===a||r.skipEmptyString&&""===a?t:null===a?[...t,[b(e,r),"[",$,"]"].join("")]:[...t,[b(e,r),"[",b($,r),"]=",b(a,r)].join("")]};case"bracket":return e=>(t,a)=>void 0===a||r.skipNull&&null===a||r.skipEmptyString&&""===a?t:null===a?[...t,[b(e,r),"[]"].join("")]:[...t,[b(e,r),"[]=",b(a,r)].join("")];case"comma":case"separator":case"bracket-separator":{const e="bracket-separator"===r.arrayFormat?"[]=":"=";return t=>(a,$)=>void 0===$||r.skipNull&&null===$||r.skipEmptyString&&""===$?a:($=null===$?"":$,0===a.length?[[b(t,r),e,b($,r)].join("")]:[[a,b($,r)].join(r.arrayFormatSeparator)])}default:return e=>(t,a)=>void 0===a||r.skipNull&&null===a||r.skipEmptyString&&""===a?t:null===a?[...t,b(e,r)]:[...t,[b(e,r),"=",b(a,r)].join("")];}}function ea(r){let e;switch(r.arrayFormat){case"index":return(r,t,a)=>{e=/\[(\d*)\]$/.exec(r),r=r.replace(/\[\d*\]$/,""),e?(void 0===a[r]&&(a[r]={}),a[r][e[1]]=t):a[r]=t};case"bracket":return(r,t,a)=>{e=/(\[\])$/.exec(r),r=r.replace(/\[\]$/,""),e?void 0!==a[r]?a[r]=[].concat(a[r],t):a[r]=[t]:a[r]=t};case"comma":case"separator":return(e,t,a)=>{const $="string"==typeof t&&t.includes(r.arrayFormatSeparator),o="string"==typeof t&&!$&&d(t,r).includes(r.arrayFormatSeparator);t=o?d(t,r):t;const n=$||o?t.split(r.arrayFormatSeparator).map(e=>d(e,r)):null===t?t:d(t,r);a[e]=n};case"bracket-separator":return(e,t,a)=>{const $=/(\[\])$/.test(e);if(e=e.replace(/\[\]$/,""),!$)return void(a[e]=t?d(t,r):t);const o=null===t?[]:t.split(r.arrayFormatSeparator).map(e=>d(e,r));void 0!==a[e]?a[e]=[].concat(a[e],o):a[e]=o};default:return(r,e,t)=>{void 0!==t[r]?t[r]=[].concat(t[r],e):t[r]=e};}}function z(r){if("string"!=typeof r||1!==r.length)throw new TypeError("arrayFormatSeparator must be single character string")}function b(r,e){return e.encode?e.strict?Y(r):encodeURIComponent(r):r}function d(r,e){return e.decode?Z(r):r}function A(r){return Array.isArray(r)?r.sort():"object"==typeof r?A(Object.keys(r)).sort((r,e)=>Number(r)-Number(e)).map(e=>r[e]):r}function B(r){const e=r.indexOf("#");return-1!==e&&(r=r.slice(0,e)),r}function fa(r){let e="";const t=r.indexOf("#");return-1!==t&&(e=r.slice(t)),e}function C(r){const e=(r=B(r)).indexOf("?");return-1===e?"":r.slice(e+1)}function D(r,e){return e.parseNumbers&&!Number.isNaN(Number(r))&&"string"==typeof r&&""!==r.trim()?r=Number(r):!e.parseBooleans||null===r||"true"!==r.toLowerCase()&&"false"!==r.toLowerCase()||(r="true"===r.toLowerCase()),r}function E(r,e){z((e=Object.assign({decode:!0,sort:!0,arrayFormat:"none",arrayFormatSeparator:",",parseNumbers:!1,parseBooleans:!1},e)).arrayFormatSeparator);const t=ea(e),a=Object.create(null);if("string"!=typeof r)return a;if(!(r=r.trim().replace(/^[?#&]/,"")))return a;for(const $ of r.split("&")){if(""===$)continue;let[r,o]=y(e.decode?$.replace(/\+/g," "):$,"=");o=void 0===o?null:["comma","separator","bracket-separator"].includes(e.arrayFormat)?o:d(o,e),t(d(r,e),o,a)}for(const $ of Object.keys(a)){const r=a[$];if("object"==typeof r&&null!==r)for(const t of Object.keys(r))r[t]=D(r[t],e);else a[$]=D(r,e)}return!1===e.sort?a:(!0===e.sort?Object.keys(a).sort():Object.keys(a).sort(e.sort)).reduce((r,e)=>{const t=a[e];return Boolean(t)&&"object"==typeof t&&!Array.isArray(t)?r[e]=A(t):r[e]=t,r},Object.create(null))}var F=C;f.extract=F;var G=E;f.parse=G;var H=(r,e)=>{if(!r)return"";z((e=Object.assign({encode:!0,strict:!0,arrayFormat:"none",arrayFormatSeparator:","},e)).arrayFormatSeparator);const t=t=>e.skipNull&&ca(r[t])||e.skipEmptyString&&""===r[t],a=da(e),$={};for(const n of Object.keys(r))t(n)||($[n]=r[n]);const o=Object.keys($);return!1!==e.sort&&o.sort(e.sort),o.map(t=>{const $=r[t];return void 0===$?"":null===$?b(t,e):Array.isArray($)?0===$.length&&"bracket-separator"===e.arrayFormat?b(t,e)+"[]":$.reduce(a(t),[]).join("&"):b(t,e)+"="+b($,e)}).filter(r=>r.length>0).join("&")};f.stringify=H;var I=(r,e)=>{e=Object.assign({decode:!0},e);const[t,a]=y(r,"#");return Object.assign({url:t.split("?")[0]||"",query:E(C(r),e)},e&&e.parseFragmentIdentifier&&a?{fragmentIdentifier:d(a,e)}:{})};f.parseUrl=I;var J=(r,e)=>{e=Object.assign({encode:!0,strict:!0,[j]:!0},e);const t=B(r.url).split("?")[0]||"",a=F(r.url),$=G(a,{sort:!1}),o=Object.assign($,r.query);let n=H(o,e);n&&(n=`?${n}`);let v=fa(r.url);return r.fragmentIdentifier&&(v=`#${e[j]?b(r.fragmentIdentifier,e):r.fragmentIdentifier}`),`${t}${n}${v}`};f.stringifyUrl=J;var K=(r,e,t)=>{t=Object.assign({parseFragmentIdentifier:!0,[j]:!1},t);const{url:a,query:$,fragmentIdentifier:o}=I(r,t);return J({url:a,query:ba($,e),fragmentIdentifier:o},t)};f.pick=K;var ga=(r,e,t)=>{const a=Array.isArray(e)?r=>!e.includes(r):(r,t)=>!e(r,t);return K(r,a,t)};f.exclude=ga;function ha(){if(!localStorage.getItem("username"))return"Click the login button to authenticate.";var t=window.VERDACCIO_API_URL?window.VERDACCIO_API_URL.replace(/^https?:/,"").replace(/-\/verdaccio\/$/,""):"//".concat(location.host).concat(location.pathname),e=localStorage.getItem("npm");return["npm config set ".concat(t,":_authToken \"").concat(e,"\""),"npm config set ".concat(t,":always-auth true")].join("\n")}var ia=g&&g.__awaiter||function(e,n,t,r){return new(t||(t=Promise))(function(o,a){function l(e){try{u(r.next(e))}catch(n){a(n)}}function i(e){try{u(r.throw(e))}catch(n){a(n)}}function u(e){var n;e.done?o(e.value):(n=e.value,n instanceof t?n:new t(function(e){e(n)})).then(l,i)}u((r=r.apply(e,n||[])).next())})},ja=g&&g.__generator||function(e,n){var t,r,o,a,l={label:0,sent:function(){if(1&o[0])throw o[1];return o[1]},trys:[],ops:[]};return a={next:i(0),throw:i(1),return:i(2)},"function"==typeof Symbol&&(a[Symbol.iterator]=function(){return this}),a;function i(a){return function(i){return function(a){if(t)throw new TypeError("Generator is already executing.");for(;l;)try{if(t=1,r&&(o=2&a[0]?r.return:a[0]?r.throw||((o=r.return)&&o.call(r),0):r.next)&&!(o=o.call(r,a[1])).done)return o;switch(r=0,o&&(a=[2&a[0],o.value]),a[0]){case 0:case 1:o=a;break;case 4:return l.label++,{value:a[1],done:!1};case 5:l.label++,r=a[1],a=[0];continue;case 7:a=l.ops.pop(),l.trys.pop();continue;default:if(!(o=(o=l.trys).length>0&&o[o.length-1])&&(6===a[0]||2===a[0])){l=0;continue}if(3===a[0]&&(!o||a[1]>o[0]&&a[1]<o[3])){l.label=a[1];break}if(6===a[0]&&l.label<o[1]){l.label=o[1],o=a;break}if(o&&l.label<o[2]){l.label=o[2],l.ops.push(a);break}o[2]&&l.ops.pop(),l.trys.pop();continue;}a=n.call(e,l)}catch(i){a=[6,i],r=0}finally{t=o=0}if(5&a[0])throw a[1];return{value:a[0]?a[1]:void 0,done:!0}}([a,i])}}},ka="#help-card .MuiCardContent-root span",la="#registryInfo--dialog-container .MuiDialogContent-root .MuiTypography-root span",L="Os1waV6BSoZQKfFwNlIwS";function ma(e){return ia(this,void 0,void 0,function(){return ja(this,function(n){switch(n.label){case 0:return[4,navigator.clipboard.writeText(e)];case 1:return n.sent(),[2];}})})}function M(e,n){var t=ha(),r=k(),o=document.querySelectorAll(e),a=Array.prototype.find.call(o,n),l=!!Array.prototype.find.call(o,function(e){return e.parentElement.classList.contains(L)});if(a&&!l){var i=a.parentElement;i&&t.split("\n").reverse().forEach(function(e){var n=i.cloneNode(!0),t=n.querySelector("span"),o=n.querySelector("button");n.classList.add(L),t.innerText=e,o.style.visibility=r?"visible":"hidden",o.onclick=function(n){n.preventDefault(),n.stopPropagation(),ma(e)},i.insertAdjacentElement("afterend",n)}),o.forEach(function(e){e.innerText.match(/^(npm|pnpm|yarn)/)&&(e.innerText.includes("adduser")||e.innerText.includes("set password"))&&e.parentElement.parentElement.removeChild(e.parentElement)})}}function na(){M(ka,function(e){return e.innerText.includes("adduser")}),M(la,function(e){return!!e.innerText.match(/((npm|pnpm) set|(yarn) config set)/)})}T({loginButton:"[data-testid=\"header--button-login\"]",logoutButton:"[data-testid=\"header--button-logout\"]",updateUsageInfo:na});if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=g}else if(typeof define==="function"&&define.amd){define(function(){return g})}})();
+(function () {
+function $parcel$interopDefault(a) {
+  return a && a.__esModule ? {
+    d: a.default
+  } : {
+    d: a
+  };
+}
+
+// ASSET: verdaccio-5.ts
+var $luKd$exports = {};
+
+//
+// After a successful login we are redirected to the UI with our username
+// and a JWT token. We need to save these in local storage so Verdaccio
+// thinks we are logged in.
+//
+function $Tj7a$export$saveCredentials(credentials) {
+  localStorage.setItem("username", credentials.username);
+  localStorage.setItem("token", credentials.uiToken);
+  localStorage.setItem("npm", credentials.npmToken);
+}
+
+function $Tj7a$export$clearCredentials() {
+  localStorage.removeItem("username");
+  localStorage.removeItem("token");
+  localStorage.removeItem("npm");
+}
+
+function $Tj7a$export$isLoggedIn() {
+  return true && !!localStorage.getItem("username") && !!localStorage.getItem("token") && !!localStorage.getItem("npm");
+}
+
+function $Tj7a$export$validateCredentials(credentials) {
+  return true && credentials.username && credentials.uiToken && credentials.npmToken;
+}
+
+var $C9JJ$export$loginHref = "/-/oauth/authorize";
+var $C9JJ$export$logoutHref = "/";
+// ASSET: ../../node_modules/strict-uri-encode/index.js
+var $Gjwo$exports = {};
+
+$Gjwo$exports = str => encodeURIComponent(str).replace(/[!'()*]/g, x => `%${x.charCodeAt(0).toString(16).toUpperCase()}`);
+
+// ASSET: ../../node_modules/decode-uri-component/index.js
+var $s8qw$exports = {};
+var $s8qw$var$token = '%[a-f0-9]{2}';
+var $s8qw$var$singleMatcher = new RegExp($s8qw$var$token, 'gi');
+var $s8qw$var$multiMatcher = new RegExp('(' + $s8qw$var$token + ')+', 'gi');
+
+function $s8qw$var$decodeComponents(components, split) {
+  try {
+    // Try to decode the entire string first
+    return decodeURIComponent(components.join(''));
+  } catch (err) {// Do nothing
+  }
+
+  if (components.length === 1) {
+    return components;
+  }
+
+  split = split || 1; // Split the array in 2 parts
+
+  var left = components.slice(0, split);
+  var right = components.slice(split);
+  return Array.prototype.concat.call([], $s8qw$var$decodeComponents(left), $s8qw$var$decodeComponents(right));
+}
+
+function $s8qw$var$decode(input) {
+  try {
+    return decodeURIComponent(input);
+  } catch (err) {
+    var tokens = input.match($s8qw$var$singleMatcher);
+
+    for (var i = 1; i < tokens.length; i++) {
+      input = $s8qw$var$decodeComponents(tokens, i).join('');
+      tokens = input.match($s8qw$var$singleMatcher);
+    }
+
+    return input;
+  }
+}
+
+function $s8qw$var$customDecodeURIComponent(input) {
+  // Keep track of all the replacements and prefill the map with the `BOM`
+  var replaceMap = {
+    '%FE%FF': '\uFFFD\uFFFD',
+    '%FF%FE': '\uFFFD\uFFFD'
+  };
+  var match = $s8qw$var$multiMatcher.exec(input);
+
+  while (match) {
+    try {
+      // Decode as big chunks as possible
+      replaceMap[match[0]] = decodeURIComponent(match[0]);
+    } catch (err) {
+      var result = $s8qw$var$decode(match[0]);
+
+      if (result !== match[0]) {
+        replaceMap[match[0]] = result;
+      }
+    }
+
+    match = $s8qw$var$multiMatcher.exec(input);
+  } // Add `%C2` at the end of the map to make sure it does not replace the combinator before everything else
+
+
+  replaceMap['%C2'] = '\uFFFD';
+  var entries = Object.keys(replaceMap);
+
+  for (var i = 0; i < entries.length; i++) {
+    // Replace all decoded components
+    var key = entries[i];
+    input = input.replace(new RegExp(key, 'g'), replaceMap[key]);
+  }
+
+  return input;
+}
+
+$s8qw$exports = function (encodedURI) {
+  if (typeof encodedURI !== 'string') {
+    throw new TypeError('Expected `encodedURI` to be of type `string`, got `' + typeof encodedURI + '`');
+  }
+
+  try {
+    encodedURI = encodedURI.replace(/\+/g, ' '); // Try the built in decoder first
+
+    return decodeURIComponent(encodedURI);
+  } catch (err) {
+    // Fallback to a more advanced decoder
+    return $s8qw$var$customDecodeURIComponent(encodedURI);
+  }
+};
+
+// ASSET: ../../node_modules/split-on-first/index.js
+var $EYyA$exports = {};
+
+$EYyA$exports = (string, separator) => {
+  if (!(typeof string === 'string' && typeof separator === 'string')) {
+    throw new TypeError('Expected the arguments to be of type `string`');
+  }
+
+  if (separator === '') {
+    return [string];
+  }
+
+  const separatorIndex = string.indexOf(separator);
+
+  if (separatorIndex === -1) {
+    return [string];
+  }
+
+  return [string.slice(0, separatorIndex), string.slice(separatorIndex + separator.length)];
+};
+
+// ASSET: ../../node_modules/filter-obj/index.js
+var $NFs2$exports = {};
+
+$NFs2$exports = function (obj, predicate) {
+  var ret = {};
+  var keys = Object.keys(obj);
+  var isArr = Array.isArray(predicate);
+
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    var val = obj[key];
+
+    if (isArr ? predicate.indexOf(key) !== -1 : predicate(key, val, obj)) {
+      ret[key] = val;
+    }
+  }
+
+  return ret;
+};
+
+// ASSET: ../../node_modules/query-string/index.js
+var $P2vx$exports = {};
+
+const $P2vx$var$isNullOrUndefined = value => value === null || value === undefined;
+
+const $P2vx$var$encodeFragmentIdentifier = Symbol('encodeFragmentIdentifier');
+
+function $P2vx$var$encoderForArrayFormat(options) {
+  switch (options.arrayFormat) {
+    case 'index':
+      return key => (result, value) => {
+        const index = result.length;
+
+        if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+          return result;
+        }
+
+        if (value === null) {
+          return [...result, [$P2vx$var$encode(key, options), '[', index, ']'].join('')];
+        }
+
+        return [...result, [$P2vx$var$encode(key, options), '[', $P2vx$var$encode(index, options), ']=', $P2vx$var$encode(value, options)].join('')];
+      };
+
+    case 'bracket':
+      return key => (result, value) => {
+        if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+          return result;
+        }
+
+        if (value === null) {
+          return [...result, [$P2vx$var$encode(key, options), '[]'].join('')];
+        }
+
+        return [...result, [$P2vx$var$encode(key, options), '[]=', $P2vx$var$encode(value, options)].join('')];
+      };
+
+    case 'comma':
+    case 'separator':
+    case 'bracket-separator':
+      {
+        const keyValueSep = options.arrayFormat === 'bracket-separator' ? '[]=' : '=';
+        return key => (result, value) => {
+          if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+            return result;
+          } // Translate null to an empty string so that it doesn't serialize as 'null'
+
+
+          value = value === null ? '' : value;
+
+          if (result.length === 0) {
+            return [[$P2vx$var$encode(key, options), keyValueSep, $P2vx$var$encode(value, options)].join('')];
+          }
+
+          return [[result, $P2vx$var$encode(value, options)].join(options.arrayFormatSeparator)];
+        };
+      }
+
+    default:
+      return key => (result, value) => {
+        if (value === undefined || options.skipNull && value === null || options.skipEmptyString && value === '') {
+          return result;
+        }
+
+        if (value === null) {
+          return [...result, $P2vx$var$encode(key, options)];
+        }
+
+        return [...result, [$P2vx$var$encode(key, options), '=', $P2vx$var$encode(value, options)].join('')];
+      };
+  }
+}
+
+function $P2vx$var$parserForArrayFormat(options) {
+  let result;
+
+  switch (options.arrayFormat) {
+    case 'index':
+      return (key, value, accumulator) => {
+        result = /\[(\d*)\]$/.exec(key);
+        key = key.replace(/\[\d*\]$/, '');
+
+        if (!result) {
+          accumulator[key] = value;
+          return;
+        }
+
+        if (accumulator[key] === undefined) {
+          accumulator[key] = {};
+        }
+
+        accumulator[key][result[1]] = value;
+      };
+
+    case 'bracket':
+      return (key, value, accumulator) => {
+        result = /(\[\])$/.exec(key);
+        key = key.replace(/\[\]$/, '');
+
+        if (!result) {
+          accumulator[key] = value;
+          return;
+        }
+
+        if (accumulator[key] === undefined) {
+          accumulator[key] = [value];
+          return;
+        }
+
+        accumulator[key] = [].concat(accumulator[key], value);
+      };
+
+    case 'comma':
+    case 'separator':
+      return (key, value, accumulator) => {
+        const isArray = typeof value === 'string' && value.includes(options.arrayFormatSeparator);
+        const isEncodedArray = typeof value === 'string' && !isArray && $P2vx$var$decode(value, options).includes(options.arrayFormatSeparator);
+        value = isEncodedArray ? $P2vx$var$decode(value, options) : value;
+        const newValue = isArray || isEncodedArray ? value.split(options.arrayFormatSeparator).map(item => $P2vx$var$decode(item, options)) : value === null ? value : $P2vx$var$decode(value, options);
+        accumulator[key] = newValue;
+      };
+
+    case 'bracket-separator':
+      return (key, value, accumulator) => {
+        const isArray = /(\[\])$/.test(key);
+        key = key.replace(/\[\]$/, '');
+
+        if (!isArray) {
+          accumulator[key] = value ? $P2vx$var$decode(value, options) : value;
+          return;
+        }
+
+        const arrayValue = value === null ? [] : value.split(options.arrayFormatSeparator).map(item => $P2vx$var$decode(item, options));
+
+        if (accumulator[key] === undefined) {
+          accumulator[key] = arrayValue;
+          return;
+        }
+
+        accumulator[key] = [].concat(accumulator[key], arrayValue);
+      };
+
+    default:
+      return (key, value, accumulator) => {
+        if (accumulator[key] === undefined) {
+          accumulator[key] = value;
+          return;
+        }
+
+        accumulator[key] = [].concat(accumulator[key], value);
+      };
+  }
+}
+
+function $P2vx$var$validateArrayFormatSeparator(value) {
+  if (typeof value !== 'string' || value.length !== 1) {
+    throw new TypeError('arrayFormatSeparator must be single character string');
+  }
+}
+
+function $P2vx$var$encode(value, options) {
+  if (options.encode) {
+    return options.strict ? $Gjwo$exports(value) : encodeURIComponent(value);
+  }
+
+  return value;
+}
+
+function $P2vx$var$decode(value, options) {
+  if (options.decode) {
+    return $s8qw$exports(value);
+  }
+
+  return value;
+}
+
+function $P2vx$var$keysSorter(input) {
+  if (Array.isArray(input)) {
+    return input.sort();
+  }
+
+  if (typeof input === 'object') {
+    return $P2vx$var$keysSorter(Object.keys(input)).sort((a, b) => Number(a) - Number(b)).map(key => input[key]);
+  }
+
+  return input;
+}
+
+function $P2vx$var$removeHash(input) {
+  const hashStart = input.indexOf('#');
+
+  if (hashStart !== -1) {
+    input = input.slice(0, hashStart);
+  }
+
+  return input;
+}
+
+function $P2vx$var$getHash(url) {
+  let hash = '';
+  const hashStart = url.indexOf('#');
+
+  if (hashStart !== -1) {
+    hash = url.slice(hashStart);
+  }
+
+  return hash;
+}
+
+function $P2vx$var$extract(input) {
+  input = $P2vx$var$removeHash(input);
+  const queryStart = input.indexOf('?');
+
+  if (queryStart === -1) {
+    return '';
+  }
+
+  return input.slice(queryStart + 1);
+}
+
+function $P2vx$var$parseValue(value, options) {
+  if (options.parseNumbers && !Number.isNaN(Number(value)) && typeof value === 'string' && value.trim() !== '') {
+    value = Number(value);
+  } else if (options.parseBooleans && value !== null && (value.toLowerCase() === 'true' || value.toLowerCase() === 'false')) {
+    value = value.toLowerCase() === 'true';
+  }
+
+  return value;
+}
+
+function $P2vx$var$parse(query, options) {
+  options = Object.assign({
+    decode: true,
+    sort: true,
+    arrayFormat: 'none',
+    arrayFormatSeparator: ',',
+    parseNumbers: false,
+    parseBooleans: false
+  }, options);
+  $P2vx$var$validateArrayFormatSeparator(options.arrayFormatSeparator);
+  const formatter = $P2vx$var$parserForArrayFormat(options); // Create an object with no prototype
+
+  const ret = Object.create(null);
+
+  if (typeof query !== 'string') {
+    return ret;
+  }
+
+  query = query.trim().replace(/^[?#&]/, '');
+
+  if (!query) {
+    return ret;
+  }
+
+  for (const param of query.split('&')) {
+    if (param === '') {
+      continue;
+    }
+
+    let [key, value] = $EYyA$exports(options.decode ? param.replace(/\+/g, ' ') : param, '='); // Missing `=` should be `null`:
+    // http://w3.org/TR/2012/WD-url-20120524/#collect-url-parameters
+
+    value = value === undefined ? null : ['comma', 'separator', 'bracket-separator'].includes(options.arrayFormat) ? value : $P2vx$var$decode(value, options);
+    formatter($P2vx$var$decode(key, options), value, ret);
+  }
+
+  for (const key of Object.keys(ret)) {
+    const value = ret[key];
+
+    if (typeof value === 'object' && value !== null) {
+      for (const k of Object.keys(value)) {
+        value[k] = $P2vx$var$parseValue(value[k], options);
+      }
+    } else {
+      ret[key] = $P2vx$var$parseValue(value, options);
+    }
+  }
+
+  if (options.sort === false) {
+    return ret;
+  }
+
+  return (options.sort === true ? Object.keys(ret).sort() : Object.keys(ret).sort(options.sort)).reduce((result, key) => {
+    const value = ret[key];
+
+    if (Boolean(value) && typeof value === 'object' && !Array.isArray(value)) {
+      // Sort object keys, not values
+      result[key] = $P2vx$var$keysSorter(value);
+    } else {
+      result[key] = value;
+    }
+
+    return result;
+  }, Object.create(null));
+}
+
+var $P2vx$export$extract = $P2vx$var$extract;
+$P2vx$exports.extract = $P2vx$export$extract;
+var $P2vx$export$parse = $P2vx$var$parse;
+$P2vx$exports.parse = $P2vx$export$parse;
+
+var $P2vx$export$stringify = (object, options) => {
+  if (!object) {
+    return '';
+  }
+
+  options = Object.assign({
+    encode: true,
+    strict: true,
+    arrayFormat: 'none',
+    arrayFormatSeparator: ','
+  }, options);
+  $P2vx$var$validateArrayFormatSeparator(options.arrayFormatSeparator);
+
+  const shouldFilter = key => options.skipNull && $P2vx$var$isNullOrUndefined(object[key]) || options.skipEmptyString && object[key] === '';
+
+  const formatter = $P2vx$var$encoderForArrayFormat(options);
+  const objectCopy = {};
+
+  for (const key of Object.keys(object)) {
+    if (!shouldFilter(key)) {
+      objectCopy[key] = object[key];
+    }
+  }
+
+  const keys = Object.keys(objectCopy);
+
+  if (options.sort !== false) {
+    keys.sort(options.sort);
+  }
+
+  return keys.map(key => {
+    const value = object[key];
+
+    if (value === undefined) {
+      return '';
+    }
+
+    if (value === null) {
+      return $P2vx$var$encode(key, options);
+    }
+
+    if (Array.isArray(value)) {
+      if (value.length === 0 && options.arrayFormat === 'bracket-separator') {
+        return $P2vx$var$encode(key, options) + '[]';
+      }
+
+      return value.reduce(formatter(key), []).join('&');
+    }
+
+    return $P2vx$var$encode(key, options) + '=' + $P2vx$var$encode(value, options);
+  }).filter(x => x.length > 0).join('&');
+};
+
+$P2vx$exports.stringify = $P2vx$export$stringify;
+
+var $P2vx$export$parseUrl = (url, options) => {
+  options = Object.assign({
+    decode: true
+  }, options);
+  const [url_, hash] = $EYyA$exports(url, '#');
+  return Object.assign({
+    url: url_.split('?')[0] || '',
+    query: $P2vx$var$parse($P2vx$var$extract(url), options)
+  }, options && options.parseFragmentIdentifier && hash ? {
+    fragmentIdentifier: $P2vx$var$decode(hash, options)
+  } : {});
+};
+
+$P2vx$exports.parseUrl = $P2vx$export$parseUrl;
+
+var $P2vx$export$stringifyUrl = (object, options) => {
+  options = Object.assign({
+    encode: true,
+    strict: true,
+    [$P2vx$var$encodeFragmentIdentifier]: true
+  }, options);
+  const url = $P2vx$var$removeHash(object.url).split('?')[0] || '';
+  const queryFromUrl = $P2vx$export$extract(object.url);
+  const parsedQueryFromUrl = $P2vx$export$parse(queryFromUrl, {
+    sort: false
+  });
+  const query = Object.assign(parsedQueryFromUrl, object.query);
+  let queryString = $P2vx$export$stringify(query, options);
+
+  if (queryString) {
+    queryString = `?${queryString}`;
+  }
+
+  let hash = $P2vx$var$getHash(object.url);
+
+  if (object.fragmentIdentifier) {
+    hash = `#${options[$P2vx$var$encodeFragmentIdentifier] ? $P2vx$var$encode(object.fragmentIdentifier, options) : object.fragmentIdentifier}`;
+  }
+
+  return `${url}${queryString}${hash}`;
+};
+
+$P2vx$exports.stringifyUrl = $P2vx$export$stringifyUrl;
+
+var $P2vx$export$pick = (input, filter, options) => {
+  options = Object.assign({
+    parseFragmentIdentifier: true,
+    [$P2vx$var$encodeFragmentIdentifier]: false
+  }, options);
+  const {
+    url,
+    query,
+    fragmentIdentifier
+  } = $P2vx$export$parseUrl(input, options);
+  return $P2vx$export$stringifyUrl({
+    url,
+    query: $NFs2$exports(query, filter),
+    fragmentIdentifier
+  }, options);
+};
+
+$P2vx$exports.pick = $P2vx$export$pick;
+
+var $P2vx$export$exclude = (input, filter, options) => {
+  const exclusionFilter = Array.isArray(filter) ? key => !filter.includes(key) : (key, value) => !filter(key, value);
+  return $P2vx$export$pick(input, exclusionFilter, options);
+};
+
+$P2vx$exports.exclude = $P2vx$export$exclude;
+
+/**
+ * Returns `?a=b&c` as `{ a: b, c: true }`.
+ */
+function $eTfY$export$parseQueryParams() {
+  var $P2vx$$interop$default = $parcel$interopDefault($P2vx$exports);
+  return $P2vx$$interop$default.d.parse(window.location.search || "?");
+}
+
+function $eTfY$export$retry(action) {
+  for (var i = 0; i < 10; i++) {
+    setTimeout(function () {
+      return action();
+    }, 100 * i);
+  }
+}
+
+function $eTfY$var$pathContainsElement(selector, e) {
+  var path = e.path || e.composedPath && e.composedPath();
+  var element = document.querySelector(selector);
+  return path.includes(element);
+}
+
+function $eTfY$export$interruptClick(selector, callback) {
+  var handleClick = function (e) {
+    if ($eTfY$var$pathContainsElement(selector, e)) {
+      e.preventDefault();
+      e.stopPropagation();
+      callback();
+    }
+  };
+
+  var capture = true;
+  document.addEventListener("click", handleClick, capture);
+}
+
+/**
+ * Change the current URL to only the current pathname and reload.
+ * We don't use `location.href` because we want the query params
+ * to be excluded from the history.
+ */
+function $wPEU$var$reloadToPathname() {
+  history.replaceState(null, "", location.pathname);
+  location.reload();
+}
+
+function $wPEU$var$saveAndRemoveQueryParams() {
+  if ($Tj7a$export$isLoggedIn()) {
+    return;
+  }
+
+  var credentials = $eTfY$export$parseQueryParams();
+
+  if (!$Tj7a$export$validateCredentials(credentials)) {
+    return;
+  }
+
+  $Tj7a$export$saveCredentials(credentials);
+  $wPEU$var$reloadToPathname();
+} //
+// By default the login button opens a form that asks the user to submit credentials.
+// We replace this behaviour and instead redirect to the route that handles OAuth.
+//
+
+
+function $wPEU$export$init(options) {
+  $wPEU$var$saveAndRemoveQueryParams();
+  var loginButton = options.loginButton,
+      logoutButton = options.logoutButton,
+      updateUsageInfo = options.updateUsageInfo;
+  $eTfY$export$interruptClick(loginButton, function () {
+    location.href = $C9JJ$export$loginHref;
+  });
+  $eTfY$export$interruptClick(logoutButton, function () {
+    $Tj7a$export$clearCredentials();
+    location.href = $C9JJ$export$logoutHref;
+  });
+  document.addEventListener("click", function () {
+    return $eTfY$export$retry(updateUsageInfo);
+  });
+  $eTfY$export$retry(updateUsageInfo);
+}
+
+// to be configured.
+//
+function $kHlU$export$getUsageInfo() {
+  var username = localStorage.getItem("username");
+
+  if (!username) {
+    return "Click the login button to authenticate.";
+  }
+
+  var configBase = window.VERDACCIO_API_URL ? window.VERDACCIO_API_URL.replace(/^https?:/, "").replace(/-\/verdaccio\/$/, "") : "//".concat(location.host).concat(location.pathname);
+  var authToken = localStorage.getItem("npm");
+  return ["npm config set ".concat(configBase, ":_authToken \"").concat(authToken, "\""), "npm config set ".concat(configBase, ":always-auth true")].join("\n");
+}
+
+var $luKd$var$__awaiter = $luKd$exports && $luKd$exports.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var $luKd$var$__generator = $luKd$exports && $luKd$exports.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function () {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) try {
+      if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+      if (y = 0, t) op = [op[0] & 2, t.value];
+
+      switch (op[0]) {
+        case 0:
+        case 1:
+          t = op;
+          break;
+
+        case 4:
+          _.label++;
+          return {
+            value: op[1],
+            done: false
+          };
+
+        case 5:
+          _.label++;
+          y = op[1];
+          op = [0];
+          continue;
+
+        case 7:
+          op = _.ops.pop();
+
+          _.trys.pop();
+
+          continue;
+
+        default:
+          if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+            _ = 0;
+            continue;
+          }
+
+          if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+            _.label = op[1];
+            break;
+          }
+
+          if (op[0] === 6 && _.label < t[1]) {
+            _.label = t[1];
+            t = op;
+            break;
+          }
+
+          if (t && _.label < t[2]) {
+            _.label = t[2];
+
+            _.ops.push(op);
+
+            break;
+          }
+
+          if (t[2]) _.ops.pop();
+
+          _.trys.pop();
+
+          continue;
+      }
+
+      op = body.call(thisArg, _);
+    } catch (e) {
+      op = [6, e];
+      y = 0;
+    } finally {
+      f = t = 0;
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var $luKd$var$helpCardUsageInfoSelector = "#help-card .MuiCardContent-root span";
+var $luKd$var$dialogUsageInfoSelector = "#registryInfo--dialog-container .MuiDialogContent-root .MuiTypography-root span";
+var $luKd$var$randomClass = "Os1waV6BSoZQKfFwNlIwS";
+
+function $luKd$var$copyToClipboard(text) {
+  return $luKd$var$__awaiter(this, void 0, void 0, function () {
+    return $luKd$var$__generator(this, function (_a) {
+      switch (_a.label) {
+        case 0:
+          return [4
+          /*yield*/
+          , navigator.clipboard.writeText(text)];
+
+        case 1:
+          _a.sent();
+
+          return [2
+          /*return*/
+          ];
+      }
+    });
+  });
+}
+
+function $luKd$var$modifyUsageInfoNodes(selector, findPredicate) {
+  var usageInfo = $kHlU$export$getUsageInfo();
+  var loggedIn = $Tj7a$export$isLoggedIn();
+  var infoElements = document.querySelectorAll(selector);
+  var firstUsageInfoEl = Array.prototype.find.call(infoElements, findPredicate);
+  var hasInjectedElement = !!Array.prototype.find.call(infoElements, function (node) {
+    return node.parentElement.classList.contains($luKd$var$randomClass);
+  }); // We can't find any element related to usage instructions,
+  // or we have already injected elements
+
+  if (!firstUsageInfoEl || hasInjectedElement) {
+    return;
+  }
+
+  var cachedParent = firstUsageInfoEl.parentElement;
+
+  if (cachedParent) {
+    usageInfo.split("\n").reverse().forEach(function (info) {
+      var clonedNode = cachedParent.cloneNode(true);
+      var textElem = clonedNode.querySelector("span");
+      var copyEl = clonedNode.querySelector("button");
+      clonedNode.classList.add($luKd$var$randomClass);
+      textElem.innerText = info;
+      copyEl.style.visibility = loggedIn ? "visible" : "hidden";
+
+      copyEl.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $luKd$var$copyToClipboard(info);
+      };
+
+      cachedParent.insertAdjacentElement("afterend", clonedNode);
+    });
+  }
+
+  infoElements.forEach(function (node) {
+    if ( // We only match lines related to bundler commands
+    !!node.innerText.match(/^(npm|pnpm|yarn)/) && ( // And only commands that we want to remove
+    node.innerText.includes("adduser") || node.innerText.includes("set password"))) {
+      node.parentElement.parentElement.removeChild(node.parentElement);
+    }
+  });
+}
+
+function $luKd$var$updateUsageInfo() {
+  $luKd$var$modifyUsageInfoNodes($luKd$var$helpCardUsageInfoSelector, function (node) {
+    return node.innerText.includes("adduser");
+  });
+  $luKd$var$modifyUsageInfoNodes($luKd$var$dialogUsageInfoSelector, function (node) {
+    return !!node.innerText.match( // This checks for an element showing instructions to set the registry URL
+    /((npm|pnpm) set|(yarn) config set)/);
+  });
+}
+
+$wPEU$export$init({
+  loginButton: "[data-testid=\"header--button-login\"]",
+  logoutButton: "[data-testid=\"header--button-logout\"]",
+  updateUsageInfo: $luKd$var$updateUsageInfo
+});
+
+if (typeof exports === "object" && typeof module !== "undefined") {
+  // CommonJS
+  module.exports = $luKd$exports;
+} else if (typeof define === "function" && define.amd) {
+  // RequireJS
+  define(function () {
+    return $luKd$exports;
+  });
+}
+})();
